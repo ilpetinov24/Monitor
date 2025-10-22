@@ -93,8 +93,9 @@ void Monitor::provideData(Data* data) {
     // Выполнение действий для наступления события
     ptr = data;
 
-    cout << "Provider: ";
+    cout << "Provider: \n";
     ptr->addValue(10);
+    cout << endl;
 
     // Уведомление потребителя
     checkEvent = true;
@@ -113,14 +114,14 @@ void Monitor::consumeData() {
 
         // Ожидание события с временным освобождением мьютекса
         while (!checkEvent && !isStopped) {
-            cout << "Consumer: жду событие" << endl;
+            cout << "\nConsumer: жду событие\n\n";
             cv.wait(ul);
         }
 
         if (isStopped) break;
 
         // Обработка события
-        cout << "\nConsumer: получил данные = ";
+        cout << "\nConsumer: получил данные ";
         ptr->printData();
 
         // Уведомление о том, что можно отправить следующее событие
